@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPiServer.Samples.DatabaseEvents", "EPiServer.Samples.DatabaseEvents\EPiServer.Samples.DatabaseEvents.csproj", "{58CB973D-030D-4E6E-A06F-88E9F11786A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPiServer.Samples.DatabaseEvents.Test", "EPiServer.Samples.DatabaseEvents.Test\EPiServer.Samples.DatabaseEvents.Test.csproj", "{B8B11DFB-F32C-45E0-B6EF-F7810C9AD924}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs01vm:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EPiServer.Samples.DatabaseEvents\\EPiServer.Samples.DatabaseEvents.Database.csproj
+		SccProjectName1 = EPiServer.Samples.DatabaseEvents
+		SccLocalPath1 = EPiServer.Samples.DatabaseEvents
+		SccProjectUniqueName2 = EPiServer.Samples.DatabaseEvents.Test\\EPiServer.Samples.DatabaseEvents.Test.csproj
+		SccProjectName2 = EPiServer.Samples.DatabaseEvents.Test
+		SccLocalPath2 = EPiServer.Samples.DatabaseEvents.Test
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58CB973D-030D-4E6E-A06F-88E9F11786A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58CB973D-030D-4E6E-A06F-88E9F11786A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58CB973D-030D-4E6E-A06F-88E9F11786A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58CB973D-030D-4E6E-A06F-88E9F11786A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B11DFB-F32C-45E0-B6EF-F7810C9AD924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B11DFB-F32C-45E0-B6EF-F7810C9AD924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B11DFB-F32C-45E0-B6EF-F7810C9AD924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B11DFB-F32C-45E0-B6EF-F7810C9AD924}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
