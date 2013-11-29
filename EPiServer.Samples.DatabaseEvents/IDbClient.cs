@@ -1,9 +1,10 @@
-﻿using System;
+﻿using EPiServer.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EPiServer.Events.Database
+namespace EPiServer.Samples.DatabaseEvents
 {
     /// <summary>
     /// Interface to the database client

@@ -10,7 +10,7 @@ using StructureMap;
 using System.Globalization;
 using EPiServer.ServiceLocation;
 
-namespace EPiServer.Events.Database
+namespace EPiServer.Samples.DatabaseEvents
 {
     /// <summary>
     /// Used as a singleton instance that reads event information from the database

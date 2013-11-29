@@ -1,5 +1,5 @@
 ﻿using System;
-namespace EPiServer.Events.Database
+namespace EPiServer.Samples.DatabaseEvents
 {
     public interface IDbEventProvider
     {

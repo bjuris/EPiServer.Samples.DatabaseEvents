@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
 
-namespace EPiServer.Events.Database
+namespace EPiServer.Samples.DatabaseEvents
 {
     /// <summary>
     /// Replica of the DataContractBinarySerializer in the Microsoft.ServiceBus assembly

@@ -9,8 +9,9 @@ using log4net;
 using System.Globalization;
 using EPiServer.Data;
 using EPiServer.ServiceLocation;
+using EPiServer.Events;
 
-namespace EPiServer.Events.Database
+namespace EPiServer.Samples.DatabaseEvents
 {
     /// <summary>
     /// Database client used for read and write to the database

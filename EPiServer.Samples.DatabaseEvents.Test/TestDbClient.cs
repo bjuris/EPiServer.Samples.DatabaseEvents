@@ -5,8 +5,9 @@ using System.Linq;
 using System.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EPiServer.Data.Providers;
+using EPiServer.Events;
 
-namespace EPiServer.Events.Database.Test
+namespace EPiServer.Samples.DatabaseEvents.Test
 {
     [TestClass]
     public class TestDbClient

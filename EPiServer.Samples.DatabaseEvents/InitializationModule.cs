@@ -13,8 +13,9 @@ using StructureMap.Attributes;
 using System.Configuration;
 using EPiServer.Framework;
 using EPiServer.ServiceLocation;
+using EPiServer.Events;
 
-namespace EPiServer.Events.Database
+namespace EPiServer.Samples.DatabaseEvents
 {
     /// <summary>
     /// Init module that sets up dependencies
