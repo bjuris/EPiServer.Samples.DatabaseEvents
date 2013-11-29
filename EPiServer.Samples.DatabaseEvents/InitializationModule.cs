@@ -33,6 +33,7 @@ namespace EPiServer.Samples.DatabaseEvents
                 {
                     var serializerFactory = new Func<IContext, XmlObjectSerializer>((ctx) => new DataContractBinarySerializer(typeof(EventMessage), context.Container.GetInstance<EventsServiceKnownTypesLookup>().KnownTypes));
                     c.For<IDbClient>().Use<DbClient>().Ctor<XmlObjectSerializer>().Is(serializerFactory);
+                    c.For<IDbEventProvider>().Singleton().Use(()=>DbEventProvider.Instance);
                 });
         }
 

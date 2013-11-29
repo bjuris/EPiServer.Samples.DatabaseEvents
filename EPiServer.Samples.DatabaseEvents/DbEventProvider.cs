@@ -33,6 +33,7 @@ namespace EPiServer.Samples.DatabaseEvents
 
         public override System.Threading.Tasks.Task InitializeAsync()
         {
+            Instance = this;
             return Task.Factory.StartNew(() =>
                 {
                     _eventMonitor.Initialize();
@@ -47,6 +48,12 @@ namespace EPiServer.Samples.DatabaseEvents
         public void ForwardReceivedMessage(EventMessage message)
         {
             base.OnMessageReceived(new EventMessageEventArgs(message));
+        }
+
+        internal static IDbEventProvider Instance
+        {
+            get;
+            set;
         }
     }
 }

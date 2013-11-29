@@ -15,7 +15,7 @@ namespace EPiServer.Samples.DatabaseEvents
     /// <summary>
     /// Used as a singleton instance that reads event information from the database
     /// </summary>
-    [ServiceConfiguration(typeof(DbEventMonitor), Lifecycle=ServiceInstanceScope.Singleton)]
+    [ServiceConfiguration(typeof(IDbEventMonitor), Lifecycle=ServiceInstanceScope.Singleton)]
     public sealed class DbEventMonitor : IDisposable, IDbEventMonitor
     {
         private static ILog _log = LogManager.GetLogger(typeof(DbEventMonitor));
