@@ -21,12 +21,14 @@ namespace EPiServer.Events.Database
         Func<IDatabaseHandler> _handler;
         XmlObjectSerializer _serializer;
         Guid _source;
+        private int? _lastReadId;
 
         public DbClient(Func<IDatabaseHandler> handler, XmlObjectSerializer serializer)
         {
             _handler = handler;
             _serializer = serializer;
             _source = Guid.NewGuid();
+            Initialize();
         }
 
         /// <summary>
@@ -53,13 +55,13 @@ namespace EPiServer.Events.Database
         /// </summary>
         /// <param name="readEventsAfterId"></param>
         /// <returns></returns>
-        public IList<ReceivedEventMessage> ReadEvents(int readEventsAfterId, out int? lastReadId)
+        public IList<EventMessage> ReadEvents()
         {
-            var list = new List<ReceivedEventMessage>();
+            var list = new List<EventMessage>();
             var handler = _handler();
-            lastReadId = handler.Execute(() =>
+            _lastReadId = handler.Execute(() =>
             {
-                var cmd = handler.CreateCommand("SELECT pkId, Source, SerializedMessage FROM tblDatabaseEvents WHERE pkId>@p0 ORDER BY pkId ASC", CommandType.Text, readEventsAfterId);
+                var cmd = handler.CreateCommand("SELECT pkId, Source, SerializedMessage FROM tblDatabaseEvents WHERE pkId>@p0 ORDER BY pkId ASC", CommandType.Text, _lastReadId);
                 int? lastReadIdFromDb = null;
                 using (IDataReader reader = cmd.ExecuteReader())
                 {
@@ -70,17 +72,21 @@ namespace EPiServer.Events.Database
                         {
                             continue;
                         }
-                        list.Add(new ReceivedEventMessage() 
-                        { 
-                            Id = reader.GetInt32(0), 
-                            Message = (EventMessage)_serializer.ReadObject(new MemoryStream((byte[])reader[2])) 
-                        });
+                        list.Add((EventMessage)_serializer.ReadObject(new MemoryStream((byte[])reader[2])));
                     }
                 }
                 return lastReadIdFromDb;
             });
 
-            return list;;
+            return list;
+        }
+
+        private void Initialize()
+        {
+            if (!_lastReadId.HasValue)
+            {
+                _lastReadId = ReadLatestEventId();
+            }
         }
 
         /// <summary>
@@ -95,7 +101,7 @@ namespace EPiServer.Events.Database
             var handler = _handler();
             handler.Execute(() =>
             {
-                var cmd = handler.CreateCommand("INSERT INTO tblDatabaseEvents(SerializedMessage) VALUES(@p0)", CommandType.Text, new BinaryReader(serializedMessage).ReadBytes((int)serializedMessage.Length));
+                var cmd = handler.CreateCommand("INSERT INTO tblDatabaseEvents(Source, SerializedMessage) VALUES(@p0,@p1)", CommandType.Text, _source, new BinaryReader(serializedMessage).ReadBytes((int)serializedMessage.Length));
                 cmd.ExecuteNonQuery();
             });
         }

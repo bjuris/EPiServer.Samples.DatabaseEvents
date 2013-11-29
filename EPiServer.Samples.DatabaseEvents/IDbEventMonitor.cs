@@ -7,7 +7,6 @@ namespace EPiServer.Events.Database
     public interface IDbEventMonitor
     {
         void Initialize();
-        int LastForwardedEvent { get; set; }
         System.Threading.Timer Timer { get; }
     }
 }

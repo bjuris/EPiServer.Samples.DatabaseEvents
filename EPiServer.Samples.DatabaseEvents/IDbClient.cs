@@ -11,18 +11,12 @@ namespace EPiServer.Events.Database
     public interface IDbClient
     {
         /// <summary>
-        /// Get the latest Id in the database
-        /// </summary>
-        /// <returns>Should return 0 if no Id is found in the database</returns>
-        int ReadLatestEventId();
-
-        /// <summary>
         /// Get all events after the specified Id
         /// </summary>
         /// <param name="readEventsAfterId"></param>
         /// <param name="lastReadId">The Id to check for</param>
         /// <returns>A list of events or an empty collection if no events was found</returns>
-        IList<ReceivedEventMessage> ReadEvents(int readEventsAfterId, out int? lastReadId);
+        IList<EventMessage> ReadEvents();
 
         /// <summary>
         /// Store an interface down to the database

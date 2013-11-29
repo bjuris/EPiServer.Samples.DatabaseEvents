@@ -20,7 +20,6 @@ namespace EPiServer.Events.Database
     {
         private static ILog _log = LogManager.GetLogger(typeof(DbEventMonitor));
         private object _workerLocker = new object();
-        private int _lastReadEventId = -1;
         private Timer _timer;
         private IDbEventProvider _provider;
         private IDbClient _dbClient;
@@ -63,40 +62,32 @@ namespace EPiServer.Events.Database
 
             try
             {
-                if (_lastReadEventId == -1)
-                {
-                    _log.Debug("Reading latest event Id from the database (initialization)");
-                    _lastReadEventId = _dbClient.ReadLatestEventId();
-                }
 
                 if (_log.IsDebugEnabled)
                 {
                     _log.Debug("Reading latest event information from the database");
                 }
 
-                int? lastReadId;
-                var events = _dbClient.ReadEvents(_lastReadEventId, out lastReadId);
+                var events = _dbClient.ReadEvents();
 
                 foreach (var ev in events)
                 {
                     if (_log.IsDebugEnabled)
                     {
-                        _log.DebugFormat("Forwarding event {0} from the database to the site", ev.Id);
+                        _log.DebugFormat("Forwarding event {0} from the database to the site", ev.SequenceNumber);
                     }
 
                     try
                     {
-                        _provider.ForwardReceivedMessage(ev.Message);
+                        _provider.ForwardReceivedMessage(ev);
                     }
                     catch (Exception e)
                     {
                         //We cannot throw here since its the responsibility of the event system to handle currupt or missing events
                         //and we do not want to get stuck in the event chain since _lastForwardedEvent will not continue to update
-                        _log.Error(String.Format(CultureInfo.InvariantCulture, "Failed to forward event {0} from the database",ev.Id),e);
+                        _log.Error(String.Format(CultureInfo.InvariantCulture, "Failed to forward event {0} from the database",ev.SequenceNumber),e);
                     }
                 }
-
-                _lastReadEventId = lastReadId.HasValue ? lastReadId.Value : _lastReadEventId;
 
                 if (_log.IsDebugEnabled)
                 {
@@ -109,21 +100,6 @@ namespace EPiServer.Events.Database
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Last event forwarded, the id is from the datbase
-        /// </summary>
-        public int LastForwardedEvent
-        {
-            get
-            {
-                return _lastReadEventId;
-            }
-            set
-            {
-                _lastReadEventId = value;
-            }
         }
 
         /// <summary>
