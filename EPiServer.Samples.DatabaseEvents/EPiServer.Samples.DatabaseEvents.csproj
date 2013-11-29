@@ -8,8 +8,8 @@
     <ProjectGuid>{58CB973D-030D-4E6E-A06F-88E9F11786A7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EPiServer.Events.Database</RootNamespace>
-    <AssemblyName>EPiServer.Events.Database</AssemblyName>
+    <RootNamespace>EPiServer.Samples.DatabaseEvents</RootNamespace>
+    <AssemblyName>EPiServer.Samples.DatabaseEvents</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
